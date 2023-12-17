@@ -73,6 +73,7 @@ if ($articleId != null) {
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title" value="<?php echo $article['title'];?>" required>
+                            <input type="text" id="articleId" name="articleId" value="<?php echo $articleId;?>" hidden>
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
@@ -99,13 +100,13 @@ if ($articleId != null) {
                             echo ' 
                             <div class="mb-3">
                             <label for="text" class="form-label">Text #' . $paragraph['p_id'] . '</label>
-                            <textarea class="form-control" id="text" name="text" rows="4" required>' . $paragraph['p_text'] . '</textarea>
+                            <textarea class="form-control" id="text[]" name="text" rows="4" required>' . $paragraph['p_text'] . '</textarea>
                         </div>
                             ';
                         }
                         ?>
 
-                        <button type="submit" class="btn btn-primary">Update Article Post</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Update Article Post</button>
                     </form>
                 </div>
             </div>

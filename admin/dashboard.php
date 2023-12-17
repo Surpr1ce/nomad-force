@@ -72,17 +72,17 @@ $db = new Database("localhost", 3306, "root", "", "nomad-force");
             <?php
             if (isset($_GET['status'])) {
                 if ($_GET['status'] == 1) {
-                    echo "<div id='alert' class='alert alert-success'>Úspešne vložená položka</div>";
+                    echo "<div id='alert' class='alert alert-success'>Úspešne vložená položka.</div>";
                 } elseif ($_GET['status'] == 2) {
-                    echo "<div id='alert' class='alert alert-danger'>Položka sa nevložila</div>";
+                    echo "<div id='alert' class='alert alert-danger'>Položka sa nevložila!</div>";
                 } elseif ($_GET['status'] == 3) {
-                    echo "<div id='alert' class='alert alert-success'>Úspešne vymazaná položka</div>";
+                    echo "<div id='alert' class='alert alert-success'>Úspešne vymazaná položka.</div>";
                 } elseif ($_GET['status'] == 4) {
-                    echo "<div id='alert' class='alert alert-danger'>Položka sa nezmazala</div>";
+                    echo "<div id='alert' class='alert alert-danger'>Položka sa nezmazala!</div>";
                 } elseif ($_GET['status'] == 5) {
-                    echo "<div id='alert' class='alert alert-success'>Úspešne aktualizovaná položka</div>";
+                    echo "<div id='alert' class='alert alert-success'>Úspešne aktualizovaná položka.</div>";
                 } elseif ($_GET['status'] == 6) {
-                    echo "<div id='alert' class='alert alert-danger'>Položka sa neaktualizovala</div>";
+                    echo "<div id='alert' class='alert alert-danger'>Položka sa neaktualizovala!</div>";
                 }
             }
             ?>

@@ -57,7 +57,6 @@ $db = new Database("localhost", 3306, "root", "", "nomad-force");
                 <div class="card-body">
                     <h2>Create New Article</h2>
                     <form method="post" action="create-item.php" enctype="multipart/form-data">
-                        <!-- Add your form fields here -->
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required>
@@ -82,12 +81,17 @@ $db = new Database("localhost", 3306, "root", "", "nomad-force");
                             <label for="color" class="form-label">Color</label>
                             <input type="text" class="form-control" id="color" name="color" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="text" class="form-label">Text</label>
-                            <textarea class="form-control" id="text" name="text" rows="4" required></textarea>
+                        <?php
+                        for ($i = 0; $i < 5; $i++) {
+                            echo '
+                            <div class="mb-3">
+                            <label for="text" class="form-label">Paragraph '.($i+1).'</label>
+                            <textarea class="form-control" id="text'.($i+1).'" name="text'.($i+1).'" rows="4" required></textarea>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Create Article Post</button>
+                            ';
+                        }
+                        ?>
+                        <button type="submit" name="submit" class="btn btn-primary">Create Article Post</button>
                     </form>
                 </div>
             </div>

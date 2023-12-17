@@ -127,7 +127,53 @@ class Database
     public function deleteArticle(int $id):bool {
         $sql = "DELETE news_paragraph, news FROM news_paragraph INNER JOIN news ON news_paragraph.news_id = news.id WHERE news_paragraph.news_id = ?;";
         $query = $this->connection->prepare($sql);
-        print_r($query);
         return $query->execute([$id]);
+    }
+
+    public function createArticle(string $title, string $category, string $date, string $image, string $image_caption, string $color, string $text):bool {
+        try {
+            $this->connection->beginTransaction();
+            $sql = "INSERT INTO news (title, category, date, image, image_caption, color) VALUES (?,?,?,?,?,?)";
+            $query = $this->connection->prepare($sql);
+            $query->execute([$title, $category, $date, $image, $image_caption, $color]);
+
+            $LAST_ID = $this->connection->lastInsertId();
+            $paragraphs = explode("\n", $text);
+            foreach ($paragraphs as $paragraph) {
+                $sql = "INSERT INTO news_paragraph (text, news_id) VALUES (?,?)";
+                $query = $this->connection->prepare($sql);
+                $query->execute([$paragraph,$LAST_ID]);
+            }
+            $this->connection->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->connection->rollBack();
+            return false;
+        }
+    }
+
+
+    public function updateArticle(string $articleId, string $title, string $category, string $date, string $image, string $image_caption, string $color, string $paragraphs):bool {
+        try {
+            $this->connection->beginTransaction();
+            $sql = "UPDATE news SET title = ?, category = ?, date = ?, image = ?, image_caption = ?, color = ? WHERE id = ?";
+            $query = $this->connection->prepare($sql);
+            $query->execute([$title, $category, $date, $image, $image_caption, $color, $articleId]);
+
+            $sql = "DELETE FROM news_paragraph WHERE news_id = ?";
+            $query = $this->connection->prepare($sql);
+            $query->execute([$articleId]);
+
+            $sql = "INSERT INTO news_paragraph (text, news_id) VALUES (?,?)";
+            $query = $this->connection->prepare($sql);
+            foreach ($paragraphs as $paragraph) {
+                $query->execute([$paragraph,$articleId]);
+            }
+            $this->connection->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->connection->rollBack();
+            return false;
+        }
     }
 }
