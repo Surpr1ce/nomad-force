@@ -501,15 +501,15 @@ strong {
   background: #198754;
 }
 
-.news-image-hover-warning::after {
+.news-image-hover-bg-warning::after {
   background: #ffc107;
 }
 
-.news-image-hover-primary::after {
+.news-image-hover-bg-primary::after {
   background: #0d6efd;
 }
 
-.news-image-hover-success::after {
+.news-image-hover-bg-success::after {
   background: #198754;
 }
 
